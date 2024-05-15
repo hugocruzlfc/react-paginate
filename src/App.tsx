@@ -7,11 +7,6 @@ function App() {
   const [comments, setComments] = useState([]);
   const [pageCount, setPageCount] = useState(0);
 
-  const handlePageClick = (data: { selected: number }) => {
-    const selected = data.selected + 1;
-    getComments(selected);
-  };
-
   useEffect(() => {
     getComments();
   }, []);
@@ -24,6 +19,11 @@ function App() {
     const total = Number(response.headers.get("X-Total-Count")); // Convert total to a number
     setPageCount(Math.ceil(total / 12));
     setComments(data);
+  };
+
+  const handlePageClick = (data: { selected: number }) => {
+    const selected = data.selected + 1;
+    getComments(selected);
   };
 
   return (
